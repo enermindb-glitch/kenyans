@@ -507,3 +507,160 @@ button:focus-visible {
 @media (prefers-reduced-motion: reduce) {
   .member-card, .btn-primary, .tab, .member-card-id { transition: none; }
 }
+
+/* =====================================================================
+   TOP NAV (shared strip linking Dashboard <-> Spotlight)
+   ===================================================================== */
+
+.top-nav {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-bottom: 2rem;
+}
+
+.top-nav a {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: rgba(31, 36, 33, 0.55);
+  padding: 0.5rem 0.9rem;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  transition: color 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+}
+
+.top-nav a:hover {
+  color: var(--ink);
+  background: rgba(31, 36, 33, 0.06);
+}
+
+.top-nav a.active {
+  color: var(--teal-deep);
+  border-color: rgba(201, 162, 39, 0.5);
+  background: rgba(201, 162, 39, 0.12);
+  font-weight: 600;
+}
+
+/* =====================================================================
+   SPOTLIGHT — weekly feature feed
+   Signature element: the "week strip" — a single running ledger of dated
+   entries down the left of each card, styled like a mono-space log book,
+   so the page reads like an ongoing dispatch rather than a static grid.
+   ===================================================================== */
+
+.spotlight-heading h2 {
+  font-family: var(--font-display);
+  font-size: 1.7rem;
+  margin: 0 0 0.3rem;
+}
+
+.spotlight-heading p {
+  color: rgba(31, 36, 33, 0.65);
+  margin: 0 0 1.6rem;
+  max-width: 62ch;
+}
+
+.spotlight-status {
+  min-height: 1.4rem;
+  font-size: 0.9rem;
+  color: var(--coral);
+  margin: 0 0 1rem;
+}
+
+.spotlight-feed {
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid rgba(31, 36, 33, 0.12);
+}
+
+.spotlight-entry {
+  display: grid;
+  grid-template-columns: 130px 1fr;
+  gap: 1.5rem;
+  padding: 1.8rem 0;
+  border-bottom: 1px solid rgba(31, 36, 33, 0.12);
+}
+
+.spotlight-entry-date {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.06em;
+  color: rgba(31, 36, 33, 0.5);
+  padding-top: 0.2rem;
+}
+
+.spotlight-entry-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.spotlight-name {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  margin: 0;
+  color: var(--ink);
+}
+
+.spotlight-headline {
+  font-size: 0.98rem;
+  color: rgba(31, 36, 33, 0.8);
+  margin: 0;
+  line-height: 1.45;
+}
+
+.spotlight-blurb {
+  font-size: 0.9rem;
+  color: rgba(31, 36, 33, 0.65);
+  line-height: 1.5;
+  margin: 0;
+}
+
+.spotlight-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-top: 0.3rem;
+}
+
+.spotlight-watch,
+.spotlight-pick {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+  padding: 0.45rem 0.8rem;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+
+.spotlight-watch {
+  background: var(--teal-deep);
+  color: var(--cream);
+}
+
+.spotlight-watch:hover { background: var(--teal-panel); }
+
+.spotlight-pick {
+  background: rgba(201, 162, 39, 0.15);
+  color: var(--teal-deep);
+  border: 1px solid rgba(201, 162, 39, 0.45);
+  font-weight: 600;
+}
+
+.spotlight-empty {
+  color: rgba(31, 36, 33, 0.55);
+  font-size: 0.9rem;
+  padding: 1.2rem 0;
+}
+
+@media (max-width: 640px) {
+  .spotlight-entry { grid-template-columns: 1fr; gap: 0.4rem; }
+  .spotlight-entry-date { padding-top: 0; }
+}
