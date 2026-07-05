@@ -1,0 +1,283 @@
+:root {
+  --ink: #1F2421;
+  --teal-deep: #163832;
+  --teal-panel: #1F4A42;
+  --cream: #F5EFDD;
+  --cream-soft: #EFE7D2;
+  --gold: #C9A227;
+  --gold-soft: #DCC468;
+  --coral: #E2634F;
+  --font-display: 'Fraunces', serif;
+  --font-body: 'Work Sans', sans-serif;
+  --font-mono: 'IBM Plex Mono', monospace;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+  font-family: var(--font-body);
+  color: var(--ink);
+  background: var(--teal-deep);
+}
+
+button, input {
+  font-family: inherit;
+}
+
+.stage {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1.05fr 1fr;
+}
+
+/* ---------- LEFT BRAND PANEL ---------- */
+
+.brand-panel {
+  background:
+    radial-gradient(ellipse at 20% -10%, rgba(201, 162, 39, 0.18), transparent 55%),
+    var(--teal-deep);
+  color: var(--cream);
+  padding: 4rem 3rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 3rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.brand-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gold-soft);
+}
+
+.brand-name {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(2.6rem, 5vw, 4rem);
+  line-height: 1.02;
+  margin: 0.6rem 0 1rem;
+  letter-spacing: -0.01em;
+}
+
+.brand-tagline {
+  font-size: 1.05rem;
+  max-width: 26ch;
+  color: var(--cream-soft);
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* ---------- SIGNATURE: THE MEMBERSHIP CARD ---------- */
+
+.card-wrap {
+  perspective: 1200px;
+}
+
+.member-card {
+  width: min(360px, 90%);
+  aspect-ratio: 1.6 / 1;
+  border-radius: 16px;
+  background: linear-gradient(155deg, var(--teal-panel), #123330 70%);
+  border: 1px solid rgba(201, 162, 39, 0.35);
+  box-shadow: 0 30px 60px -20px rgba(0,0,0,0.55);
+  padding: 1.4rem 1.6rem;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transform: rotate(-4deg);
+  transition: transform 0.4s ease;
+  overflow: hidden;
+}
+
+.member-card:hover { transform: rotate(-1deg) scale(1.01); }
+
+.member-card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.member-card-club {
+  font-family: var(--font-display);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  font-size: 0.95rem;
+  color: var(--gold-soft);
+}
+
+.member-card-id {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--cream-soft);
+  transition: color 0.3s ease;
+}
+
+.member-card-id.revealed {
+  color: var(--gold);
+  font-weight: 600;
+}
+
+.member-card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.member-card-label {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(245, 239, 221, 0.55);
+}
+
+.member-card-name {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  color: var(--cream);
+  min-height: 1.6rem;
+}
+
+.member-card-bottom {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.member-card-dots {
+  font-family: var(--font-mono);
+  letter-spacing: 0.3em;
+  font-size: 1rem;
+  color: var(--cream-soft);
+}
+
+.member-card-shine {
+  position: absolute;
+  inset: -40% -20%;
+  background: linear-gradient(115deg, transparent 40%, rgba(255,255,255,0.08) 50%, transparent 60%);
+  pointer-events: none;
+}
+
+/* ---------- RIGHT FORM PANEL ---------- */
+
+.form-panel {
+  background: var(--cream);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 2rem;
+}
+
+.form-card {
+  width: 100%;
+  max-width: 380px;
+}
+
+.tabs {
+  display: flex;
+  border-bottom: 1px solid rgba(31, 36, 33, 0.15);
+  margin-bottom: 1.6rem;
+}
+
+.tab {
+  flex: 1;
+  background: none;
+  border: none;
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 500;
+  color: rgba(31, 36, 33, 0.45);
+  padding: 0.7rem 0.5rem;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.tab[aria-selected="true"] {
+  color: var(--ink);
+  border-bottom-color: var(--gold);
+}
+
+.tab:focus-visible,
+input:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--teal-panel);
+  outline-offset: 2px;
+}
+
+.form-status {
+  min-height: 1.4rem;
+  font-size: 0.88rem;
+  margin: 0 0 0.8rem;
+  color: var(--coral);
+}
+
+.form-status.success { color: #2E7D5B; }
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: rgba(31, 36, 33, 0.75);
+}
+
+.field input {
+  font-size: 1rem;
+  padding: 0.65rem 0.8rem;
+  border-radius: 8px;
+  border: 1px solid rgba(31, 36, 33, 0.2);
+  background: #fff;
+  color: var(--ink);
+}
+
+.field-hint {
+  font-size: 0.72rem;
+  font-weight: 400;
+  color: rgba(31, 36, 33, 0.5);
+}
+
+.btn-primary {
+  margin-top: 0.4rem;
+  background: var(--teal-deep);
+  color: var(--cream);
+  border: none;
+  border-radius: 8px;
+  padding: 0.8rem 1rem;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.1s ease;
+}
+
+.btn-primary:hover { background: var(--teal-panel); }
+.btn-primary:active { transform: scale(0.98); }
+.btn-primary:disabled { opacity: 0.6; cursor: not-allowed; }
+
+/* ---------- RESPONSIVE ---------- */
+
+@media (max-width: 860px) {
+  .stage { grid-template-columns: 1fr; }
+  .brand-panel { padding: 2.5rem 1.5rem; gap: 2rem; }
+  .card-wrap { display: flex; justify-content: center; }
+  .form-panel { padding: 2.5rem 1.5rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .member-card, .btn-primary, .tab, .member-card-id { transition: none; }
+}
