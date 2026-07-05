@@ -1,5 +1,5 @@
 // ⚠️ PASTE YOUR GOOGLE APPS SCRIPT WEB APP URL HERE (ends in /exec)
-const API_URL = "https://script.google.com/macros/s/AKfycbzaFfB5BZKQeo8SJNh3Lm6fHea26nJuXrR5jtVx1I_cyx41EipjeklGjwRVHV7bdq9Vzw/exec";
+const API_URL = "https://script.google.com/macros/s/AKfycbyVAq8ywwOZVHaMPrVAna8YukbAyBvY7MJfg76JzVUGOTat4iJlWmjFNWNtJAX0idrOoQ/exec";
 
 const tabLogin = document.getElementById('tabLogin');
 const tabRegister = document.getElementById('tabRegister');
@@ -61,11 +61,11 @@ function revealMemberId(memberId) {
 
 // ---- API calls ----
 
-async function callApi(action, email, password) {
+async function callApi(payload) {
   const response = await fetch(API_URL, {
     method: 'POST',
     // Plain text body avoids a CORS preflight against Apps Script.
-    body: JSON.stringify({ action, email, password }),
+    body: JSON.stringify(payload),
   });
   if (!response.ok) {
     throw new Error('Network error (' + response.status + ')');
@@ -92,11 +92,11 @@ loginForm.addEventListener('submit', async (e) => {
   setStatus('Signing in…');
   submitBtn.disabled = true;
   try {
-    const result = await callApi('login', email, password);
+    const result = await callApi({ action: 'login', email, password });
     if (result.success) {
       revealMemberId(result.memberId);
       setStatus(result.message, 'success');
-      localStorage.setItem('clubhouse_session', JSON.stringify({ email, memberId: result.memberId }));
+      localStorage.setItem('nightowls_session', JSON.stringify({ email, memberId: result.memberId, name: result.name }));
       setTimeout(() => { window.location.href = 'dashboard.html'; }, 600);
     } else {
       setStatus(result.message);
@@ -119,11 +119,11 @@ registerForm.addEventListener('submit', async (e) => {
   setStatus('Creating your account…');
   submitBtn.disabled = true;
   try {
-    const result = await callApi('register', email, password);
+    const result = await callApi({ action: 'register', email, password });
     if (result.success) {
       revealMemberId(result.memberId);
       setStatus(result.message, 'success');
-      localStorage.setItem('clubhouse_session', JSON.stringify({ email, memberId: result.memberId }));
+      localStorage.setItem('nightowls_session', JSON.stringify({ email, memberId: result.memberId, name: result.name }));
       setTimeout(() => { window.location.href = 'dashboard.html'; }, 900);
     } else {
       setStatus(result.message);
@@ -132,6 +132,54 @@ registerForm.addEventListener('submit', async (e) => {
     setStatus('Something went wrong: ' + err.message);
   } finally {
     submitBtn.disabled = false;
+  }
+});
+
+// ---- Member lookup (search by member ID or name) ----
+
+const lookupForm = document.getElementById('lookupForm');
+const lookupResults = document.getElementById('lookupResults');
+
+function renderLookupResults(results) {
+  lookupResults.innerHTML = '';
+  if (!results.length) {
+    const li = document.createElement('li');
+    li.className = 'lookup-empty';
+    li.textContent = 'No members found.';
+    lookupResults.appendChild(li);
+    return;
+  }
+  results.forEach((member) => {
+    const li = document.createElement('li');
+    const name = document.createElement('span');
+    name.className = 'lookup-name';
+    name.textContent = member.name || '—';
+    const id = document.createElement('span');
+    id.className = 'lookup-id';
+    id.textContent = member.memberId;
+    li.appendChild(name);
+    li.appendChild(id);
+    lookupResults.appendChild(li);
+  });
+}
+
+lookupForm.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  if (!guardApiUrl()) return;
+
+  const query = document.getElementById('lookupQuery').value.trim();
+  if (!query) return;
+
+  lookupResults.innerHTML = '<li class="lookup-empty">Searching…</li>';
+  try {
+    const result = await callApi({ action: 'search', query });
+    if (result.success) {
+      renderLookupResults(result.results);
+    } else {
+      lookupResults.innerHTML = '<li class="lookup-empty">' + (result.message || 'Search failed.') + '</li>';
+    }
+  } catch (err) {
+    lookupResults.innerHTML = '<li class="lookup-empty">Something went wrong: ' + err.message + '</li>';
   }
 });
 
