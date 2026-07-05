@@ -7,43 +7,14 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,500&family=Work+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css" />
-<style>
-  .dash-stage {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: var(--cream);
-    padding: 2rem;
-  }
-  .dash-card {
-    max-width: 420px;
-    width: 100%;
-    text-align: center;
-  }
-  .dash-card h1 {
-    font-family: var(--font-display);
-    font-size: 2rem;
-    margin-bottom: 0.4rem;
-  }
-  .dash-card p { color: rgba(31,36,33,0.7); margin-bottom: 2rem; }
-  .dash-signout {
-    background: none;
-    border: 1px solid rgba(31,36,33,0.25);
-    padding: 0.6rem 1.2rem;
-    border-radius: 8px;
-    cursor: pointer;
-    font-family: var(--font-body);
-    font-weight: 500;
-  }
-  .dash-signout:hover { background: rgba(31,36,33,0.06); }
-</style>
 </head>
 <body>
 
-<div class="dash-stage">
-  <div class="dash-card">
-    <div class="card-wrap" style="margin: 0 auto 2rem;">
+<div class="dash-page">
+
+  <!-- Member header -->
+  <header class="dash-header">
+    <div class="card-wrap dash-card-wrap">
       <div class="member-card" id="memberCard">
         <div class="member-card-top">
           <span class="member-card-club">NIGHT OWLS</span>
@@ -60,27 +31,30 @@
         <div class="member-card-shine"></div>
       </div>
     </div>
-    <h1>Welcome back.</h1>
-    <p id="welcomeText">You're signed in.</p>
-    <button class="dash-signout" id="signOutBtn">Sign out</button>
-  </div>
+    <div class="dash-welcome">
+      <h1>Welcome back.</h1>
+      <p id="welcomeText">You're signed in.</p>
+      <button class="dash-signout" id="signOutBtn">Sign out</button>
+    </div>
+  </header>
+
+  <!-- Owls Dynasty book catalog -->
+  <section class="dynasty-section">
+    <div class="dynasty-heading">
+      <h2>Owls Dynasty</h2>
+      <p>The club's reading list. Order a copy and we'll follow up to arrange payment and delivery.</p>
+    </div>
+
+    <p class="dynasty-status" id="dynastyStatus" role="status"></p>
+
+    <div class="book-grid" id="bookGrid">
+      <p class="book-empty">Loading the catalog…</p>
+    </div>
+  </section>
+
 </div>
 
-<script>
-  const session = JSON.parse(localStorage.getItem('nightowls_session') || 'null');
-  if (!session) {
-    window.location.href = 'index.html';
-  } else {
-    const namePart = session.email.includes('@') ? session.email.split('@')[0] : session.email;
-    document.getElementById('cardName').textContent = namePart.replace(/[._]/g, ' ');
-    document.getElementById('cardId').textContent = session.memberId || 'MEM-????';
-    document.getElementById('welcomeText').textContent = session.email + ' — membership ' + (session.memberId || '');
-  }
-
-  document.getElementById('signOutBtn').addEventListener('click', () => {
-    localStorage.removeItem('nightowls_session');
-    window.location.href = 'index.html';
-  });
-</script>
+<script src="api.js"></script>
+<script src="dashboard.js"></script>
 </body>
 </html>
