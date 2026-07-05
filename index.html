@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>The Clubhouse — Join or Sign In</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,500&family=Work+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<div class="stage">
+
+  <!-- LEFT: brand panel -->
+  <section class="brand-panel">
+    <div class="brand-mark">
+      <span class="brand-eyebrow">Est. 2026</span>
+      <h1 class="brand-name">The<br>Clubhouse</h1>
+      <p class="brand-tagline">One roster. One roof. Sign up and you're in.</p>
+    </div>
+
+    <!-- Signature element: live membership card that fills in as you type -->
+    <div class="card-wrap" aria-hidden="true">
+      <div class="member-card" id="memberCard">
+        <div class="member-card-top">
+          <span class="member-card-club">CLUBHOUSE</span>
+          <span class="member-card-id" id="cardId">MEM-????</span>
+        </div>
+        <div class="member-card-body">
+          <span class="member-card-label">Member</span>
+          <span class="member-card-name" id="cardName">—</span>
+        </div>
+        <div class="member-card-bottom">
+          <span class="member-card-label">Access code</span>
+          <span class="member-card-dots" id="cardDots">••••••</span>
+        </div>
+        <div class="member-card-shine"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RIGHT: auth form -->
+  <section class="form-panel">
+    <div class="form-card">
+
+      <div class="tabs" role="tablist">
+        <button class="tab" id="tabLogin" role="tab" aria-selected="true">Sign in</button>
+        <button class="tab" id="tabRegister" role="tab" aria-selected="false">Join up</button>
+      </div>
+
+      <p class="form-status" id="formStatus" role="status"></p>
+
+      <!-- LOGIN FORM -->
+      <form id="loginForm" class="auth-form" novalidate>
+        <label class="field">
+          <span>Email</span>
+          <input type="email" id="loginEmail" autocomplete="email" required />
+        </label>
+        <label class="field">
+          <span>Password</span>
+          <input type="password" id="loginPassword" autocomplete="current-password" required />
+        </label>
+        <button type="submit" class="btn-primary" id="loginSubmit">Sign in</button>
+      </form>
+
+      <!-- REGISTER FORM -->
+      <form id="registerForm" class="auth-form" novalidate hidden>
+        <label class="field">
+          <span>Email</span>
+          <input type="email" id="registerEmail" autocomplete="email" required />
+        </label>
+        <label class="field">
+          <span>Password</span>
+          <input type="password" id="registerPassword" autocomplete="new-password" required minlength="6" />
+          <span class="field-hint">At least 6 characters.</span>
+        </label>
+        <button type="submit" class="btn-primary" id="registerSubmit">Create account</button>
+      </form>
+
+    </div>
+  </section>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
