@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Nairobi Nightowls — This Week</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,500&family=Work+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+<div class="dash-page">
+  <nav class="top-nav">
+    <a href="dashboard.html">Owls Dynasty</a>
+    <a href="spotlight.html" class="active">This Week</a>
+  </nav>
+
+  <section class="spotlight-section">
+    <div class="spotlight-heading">
+      <h2>This Week</h2>
+      <p>Founders and public figures whose reading habits made news this week — their interviews, and the Owls Dynasty title behind the "Dynasty Pick" badge when there is one.</p>
+    </div>
+    <p class="spotlight-status" id="spotlightStatus" role="status"></p>
+    <div class="spotlight-feed" id="spotlightFeed">
+      <p class="spotlight-empty">Loading this week's features…</p>
+    </div>
+  </section>
+</div>
+<script src="api.js"></script>
+<script src="spotlight.js"></script>
+</body>
+</html>
