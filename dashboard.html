@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>The Clubhouse — Dashboard</title>
+<title>Nairobi Nightowls — Dashboard</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,500&family=Work+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css" />
@@ -46,7 +46,7 @@
     <div class="card-wrap" style="margin: 0 auto 2rem;">
       <div class="member-card" id="memberCard">
         <div class="member-card-top">
-          <span class="member-card-club">CLUBHOUSE</span>
+          <span class="member-card-club">NIGHT OWLS</span>
           <span class="member-card-id revealed" id="cardId">MEM-????</span>
         </div>
         <div class="member-card-body">
@@ -67,7 +67,7 @@
 </div>
 
 <script>
-  const session = JSON.parse(localStorage.getItem('clubhouse_session') || 'null');
+  const session = JSON.parse(localStorage.getItem('nightowls_session') || 'null');
   if (!session) {
     window.location.href = 'index.html';
   } else {
@@ -78,7 +78,7 @@
   }
 
   document.getElementById('signOutBtn').addEventListener('click', () => {
-    localStorage.removeItem('clubhouse_session');
+    localStorage.removeItem('nightowls_session');
     window.location.href = 'index.html';
   });
 </script>
