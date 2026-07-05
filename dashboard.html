@@ -9,8 +9,11 @@
 <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-
 <div class="dash-page">
+  <nav class="top-nav">
+    <a href="dashboard.html" class="active">Owls Dynasty</a>
+    <a href="spotlight.html">This Week</a>
+  </nav>
 
   <!-- Member header -->
   <header class="dash-header">
@@ -37,23 +40,18 @@
       <button class="dash-signout" id="signOutBtn">Sign out</button>
     </div>
   </header>
-
   <!-- Owls Dynasty book catalog -->
   <section class="dynasty-section">
     <div class="dynasty-heading">
       <h2>Owls Dynasty</h2>
       <p>The club's reading list. Order a copy and we'll follow up to arrange payment and delivery.</p>
     </div>
-
     <p class="dynasty-status" id="dynastyStatus" role="status"></p>
-
     <div class="book-grid" id="bookGrid">
       <p class="book-empty">Loading the catalog…</p>
     </div>
   </section>
-
 </div>
-
 <script src="api.js"></script>
 <script src="dashboard.js"></script>
 </body>
