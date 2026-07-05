@@ -11,6 +11,10 @@ const cardId = document.getElementById('cardId');
 const welcomeText = document.getElementById('welcomeText');
 const dynastyStatus = document.getElementById('dynastyStatus');
 const bookGrid = document.getElementById('bookGrid');
+const categoryTabs = document.getElementById('categoryTabs');
+
+let allBooks = [];
+let activeCategory = 'All';
 
 function initHeader() {
   const namePart = session.email.includes('@') ? session.email.split('@')[0] : session.email;
@@ -34,15 +38,57 @@ function formatPrice(price) {
   return 'KES ' + (isNaN(n) ? price : n.toLocaleString());
 }
 
+function formatIcon(format) {
+  return String(format || '').toLowerCase() === 'audio' ? '🎧' : '📖';
+}
+
+function renderCategoryTabs(books) {
+  const categories = ['All', ...new Set(books.map((b) => b.category).filter(Boolean))];
+  categoryTabs.innerHTML = '';
+  categories.forEach((category) => {
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'category-tab';
+    btn.textContent = category;
+    btn.setAttribute('role', 'tab');
+    btn.setAttribute('aria-selected', String(category === activeCategory));
+    btn.addEventListener('click', () => {
+      activeCategory = category;
+      renderCategoryTabs(books);
+      renderBooks(filterBooks(books));
+    });
+    categoryTabs.appendChild(btn);
+  });
+}
+
+function filterBooks(books) {
+  if (activeCategory === 'All') return books;
+  return books.filter((b) => b.category === activeCategory);
+}
+
 function renderBooks(books) {
   bookGrid.innerHTML = '';
   if (!books.length) {
-    bookGrid.innerHTML = '<p class="book-empty">No books in the catalog yet — add some to the "Owls Dynasty" sheet.</p>';
+    bookGrid.innerHTML = '<p class="book-empty">No titles in this category yet — add some to the "Owls Dynasty" sheet.</p>';
     return;
   }
   books.forEach((book) => {
     const card = document.createElement('article');
     card.className = 'book-card';
+
+    const topRow = document.createElement('div');
+    topRow.className = 'book-top-row';
+
+    const formatBadge = document.createElement('span');
+    formatBadge.className = 'format-badge';
+    formatBadge.textContent = formatIcon(book.format) + ' ' + (book.format || 'Book');
+
+    const categoryBadge = document.createElement('span');
+    categoryBadge.className = 'category-badge';
+    categoryBadge.textContent = book.category || '';
+
+    topRow.appendChild(formatBadge);
+    if (book.category) topRow.appendChild(categoryBadge);
 
     const title = document.createElement('h3');
     title.className = 'book-title';
@@ -65,12 +111,13 @@ function renderBooks(books) {
 
     const button = document.createElement('button');
     button.className = 'btn-order';
-    button.textContent = 'Order this book';
+    button.textContent = 'Order this ' + (String(book.format).toLowerCase() === 'audio' ? 'audio' : 'book');
     button.addEventListener('click', () => orderBook(book.id, button));
 
     footer.appendChild(price);
     footer.appendChild(button);
 
+    card.appendChild(topRow);
     card.appendChild(title);
     card.appendChild(author);
     if (book.description) card.appendChild(desc);
@@ -88,7 +135,9 @@ async function loadBooks() {
   try {
     const result = await callApi({ action: 'listBooks' });
     if (result.success) {
-      renderBooks(result.books);
+      allBooks = result.books;
+      renderCategoryTabs(allBooks);
+      renderBooks(filterBooks(allBooks));
     } else {
       bookGrid.innerHTML = '<p class="book-empty">' + (result.message || 'Could not load the catalog.') + '</p>';
     }
