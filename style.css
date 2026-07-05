@@ -312,6 +312,10 @@ button:focus-visible {
   gap: 1.1rem;
 }
 
+.auth-form[hidden] {
+  display: none;
+}
+
 .field {
   display: flex;
   flex-direction: column;
