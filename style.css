@@ -357,6 +357,144 @@ button:focus-visible {
 .btn-primary:active { transform: scale(0.98); }
 .btn-primary:disabled { opacity: 0.6; cursor: not-allowed; }
 
+/* ---------- DASHBOARD ---------- */
+
+.dash-page {
+  min-height: 100vh;
+  background: var(--cream);
+  padding: 3rem clamp(1.5rem, 5vw, 4rem);
+}
+
+.dash-header {
+  display: flex;
+  align-items: center;
+  gap: 2.5rem;
+  flex-wrap: wrap;
+  padding-bottom: 2.5rem;
+  border-bottom: 1px solid rgba(31, 36, 33, 0.12);
+  margin-bottom: 2.5rem;
+}
+
+.dash-card-wrap { flex-shrink: 0; }
+
+.dash-welcome h1 {
+  font-family: var(--font-display);
+  font-size: 1.8rem;
+  margin: 0 0 0.3rem;
+}
+
+.dash-welcome p {
+  color: rgba(31, 36, 33, 0.65);
+  margin: 0 0 1rem;
+}
+
+.dash-signout {
+  background: none;
+  border: 1px solid rgba(31, 36, 33, 0.25);
+  padding: 0.55rem 1.1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-family: var(--font-body);
+  font-weight: 500;
+}
+
+.dash-signout:hover { background: rgba(31, 36, 33, 0.06); }
+
+.dynasty-heading h2 {
+  font-family: var(--font-display);
+  font-size: 1.7rem;
+  margin: 0 0 0.3rem;
+}
+
+.dynasty-heading p {
+  color: rgba(31, 36, 33, 0.65);
+  margin: 0 0 1.2rem;
+  max-width: 60ch;
+}
+
+.dynasty-status {
+  min-height: 1.4rem;
+  font-size: 0.9rem;
+  color: var(--coral);
+  margin: 0 0 1rem;
+}
+
+.dynasty-status.success { color: #2E7D5B; }
+
+.book-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 1.2rem;
+}
+
+.book-card {
+  background: #fff;
+  border: 1px solid rgba(31, 36, 33, 0.1);
+  border-radius: 12px;
+  padding: 1.3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.book-title {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  margin: 0;
+}
+
+.book-author {
+  font-size: 0.85rem;
+  color: rgba(31, 36, 33, 0.6);
+  margin: 0;
+}
+
+.book-desc {
+  font-size: 0.88rem;
+  color: rgba(31, 36, 33, 0.75);
+  line-height: 1.4;
+  margin: 0.3rem 0 0.6rem;
+  flex-grow: 1;
+}
+
+.book-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.8rem;
+  margin-top: auto;
+}
+
+.book-price {
+  font-family: var(--font-mono);
+  font-weight: 600;
+  color: var(--teal-panel);
+}
+
+.btn-order {
+  background: var(--teal-deep);
+  color: var(--cream);
+  border: none;
+  border-radius: 8px;
+  padding: 0.55rem 0.9rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.btn-order:hover { background: var(--teal-panel); }
+.btn-order:disabled { opacity: 0.6; cursor: not-allowed; }
+
+.book-empty {
+  color: rgba(31, 36, 33, 0.55);
+  font-size: 0.9rem;
+}
+
+@media (max-width: 640px) {
+  .dash-header { flex-direction: column; align-items: flex-start; }
+}
+
 /* ---------- RESPONSIVE ---------- */
 
 @media (max-width: 860px) {
