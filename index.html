@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>The Clubhouse — Join or Sign In</title>
+<title>Nairobi Nightowls — Join or Sign In</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,500&family=Work+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css" />
@@ -16,15 +16,15 @@
   <section class="brand-panel">
     <div class="brand-mark">
       <span class="brand-eyebrow">Est. 2026</span>
-      <h1 class="brand-name">The<br>Clubhouse</h1>
-      <p class="brand-tagline">One roster. One roof. Sign up and you're in.</p>
+      <h1 class="brand-name">Nairobi<br>Nightowls</h1>
+      <p class="brand-tagline">One roster, one nest. Sign up and join the flock.</p>
     </div>
 
     <!-- Signature element: live membership card that fills in as you type -->
     <div class="card-wrap" aria-hidden="true">
       <div class="member-card" id="memberCard">
         <div class="member-card-top">
-          <span class="member-card-club">CLUBHOUSE</span>
+          <span class="member-card-club">NIGHT OWLS</span>
           <span class="member-card-id" id="cardId">MEM-????</span>
         </div>
         <div class="member-card-body">
@@ -37,6 +37,16 @@
         </div>
         <div class="member-card-shine"></div>
       </div>
+    </div>
+
+    <!-- Member lookup: search by member ID or name -->
+    <div class="lookup-wrap">
+      <h2 class="lookup-title">Find a member</h2>
+      <form id="lookupForm" class="lookup-form" novalidate>
+        <input type="text" id="lookupQuery" placeholder="Member ID or name" aria-label="Member ID or name" />
+        <button type="submit" class="btn-lookup">Search</button>
+      </form>
+      <ul class="lookup-results" id="lookupResults"></ul>
     </div>
   </section>
 
