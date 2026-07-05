@@ -77,6 +77,8 @@ function renderSpotlight(entries) {
       pick.textContent = 'Dynasty Pick — ' + entry.bookTitle + ' (' + formatPrice(entry.bookPrice) + ')';
       actions.appendChild(pick);
     }
+    // Note: bookFormat isn't returned by listSpotlight yet — the badge above
+    // shows title + price only.
 
     if (actions.children.length) {
       body.appendChild(actions);
