@@ -1,5 +1,4 @@
-// ⚠️ PASTE YOUR GOOGLE APPS SCRIPT WEB APP URL HERE (ends in /exec)
-const API_URL = "https://script.google.com/macros/s/AKfycbyVAq8ywwOZVHaMPrVAna8YukbAyBvY7MJfg76JzVUGOTat4iJlWmjFNWNtJAX0idrOoQ/exec";
+// API_URL and callApi() now live in api.js (included before this file in index.html).
 
 const tabLogin = document.getElementById('tabLogin');
 const tabRegister = document.getElementById('tabRegister');
@@ -61,20 +60,8 @@ function revealMemberId(memberId) {
 
 // ---- API calls ----
 
-async function callApi(payload) {
-  const response = await fetch(API_URL, {
-    method: 'POST',
-    // Plain text body avoids a CORS preflight against Apps Script.
-    body: JSON.stringify(payload),
-  });
-  if (!response.ok) {
-    throw new Error('Network error (' + response.status + ')');
-  }
-  return response.json();
-}
-
 function guardApiUrl() {
-  if (!API_URL || API_URL.startsWith('PASTE_')) {
+  if (!apiConnected()) {
     setStatus('Backend not connected yet — paste your Apps Script URL into script.js.');
     return false;
   }
